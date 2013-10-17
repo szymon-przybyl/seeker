@@ -12,50 +12,50 @@ Right now it supports only [sunspot](https://github.com/sunspot/sunspot).
 
 Given you have Product model:
 
-  class Product < ActiveRecord::Base
-  end
+    class Product < ActiveRecord::Base
+    end
 
 Create corresponding searcher:
 
-  # app/searchers/product_searcher.rb
-  class ProductSearcher < Seeker::Base
-    attr_accessor :name, :max_price
+    # app/searchers/product_searcher.rb
+    class ProductSearcher < Seeker::Base
+      attr_accessor :name, :max_price
 
-    searchable do
-      text :name
-      integer :price
-    end
+      searchable do
+        text :name
+        integer :price
+      end
 
-    def search(query)
-      query.fulltext(:name, @name) if @name.present?
-      query.with(:price).less_than_or_equal_to(@max_price) if @max_price.present?
+      def search(query)
+        query.fulltext(:name, @name) if @name.present?
+        query.with(:price).less_than_or_equal_to(@max_price) if @max_price.present?
+      end
     end
-  end
 
 Use it in your controller:
 
-  class ProductsController < ApplicationController
-    def index
-      @searcher = ProductSearcher.new params[:product]
+    class ProductsController < ApplicationController
+      def index
+        @searcher = ProductSearcher.new params[:product]
+      end
     end
-  end
 
 And use it in your view with form helper, just like model:
 
-  # app/views/products/index.html.slim
-  = form_for @searcher do |f|
-    = f.label :name
-    = f.text_field :name
+    # app/views/products/index.html.slim
+    = form_for @searcher do |f|
+      = f.label :name
+      = f.text_field :name
 
-    = f.label :max_price
-    = f.number_field :max_price
+      = f.label :max_price
+      = f.number_field :max_price
 
-    = f.submit
+      = f.submit
 
-  h1 Search results
-  ul
-    = @searcher.results.each do |product|
-      li #{product.name} - #{product.price}
+    h1 Search results
+    ul
+      = @searcher.results.each do |product|
+        li #{product.name} - #{product.price}
 
 
 ## TODO
