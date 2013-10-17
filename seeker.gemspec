@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["szymon@estender.net"]
   spec.description   = %q{This Ruby on Rails gem provides an elegant way to separate search logic out of models.}
   spec.summary       = %q{It separates search indecies setup and search rules to searchers. They also may be used in form helpers just like models.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/szymon-przybyl/seeker"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
