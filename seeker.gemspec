@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Seeker::VERSION
   spec.authors       = ["Szymon Przybył"]
   spec.email         = ["szymon@estender.net"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{This Ruby on Rails gem provides an elegant way to separate search logic out of models.}
+  spec.summary       = %q{It separates search indecies setup and search rules to searchers. They also may be used in form helpers just like models.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
