@@ -2,7 +2,7 @@
 
 This Ruby on Rails gem provides an elegant way to separate search logic out of models.
 
-Right now it supports only [sunspot](https://github.com/sunspot/sunspot).
+Right now it supports only [sunspot](https://github.com/sunspot/sunspot) and was tested on Rails 3.2.13.
 
 ## Installation
 
