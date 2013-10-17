@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "seeker"
   spec.version       = Seeker::VERSION
   spec.authors       = ["Szymon Przybył"]
-  spec.email         = ["szymon@codequest.com"]
+  spec.email         = ["szymon@estender.net"]
   spec.description   = %q{TODO: Write a gem description}
   spec.summary       = %q{TODO: Write a gem summary}
   spec.homepage      = ""

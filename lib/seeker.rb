@@ -1,5 +1,6 @@
-require "seeker/version"
+require 'seeker/version'
+require 'seeker/railtie'
+require 'seeker/base'
 
 module Seeker
-  # Your code goes here...
 end

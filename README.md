@@ -1,29 +1,64 @@
 # Seeker
 
-TODO: Write a gem description
+This Ruby on Rails gem provides an elegant way to separate search logic out of models.
+
+Right now it supports only [sunspot](https://github.com/sunspot/sunspot).
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'seeker'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install seeker
+  gem 'seeker'
 
 ## Usage
 
-TODO: Write usage instructions here
+Given you have Product model:
 
-## Contributing
+  class Product < ActiveRecord::Base
+  end
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Create corresponding searcher:
+
+  # app/searchers/product_searcher.rb
+  class ProductSearcher < Seeker::Base
+    attr_accessor :name, :max_price
+
+    searchable do
+      text :name
+      integer :price
+    end
+
+    def search(query)
+      query.fulltext(:name, @name) if @name.present?
+      query.with(:price).less_than_or_equal_to(@max_price) if @max_price.present?
+    end
+  end
+
+Use it in your controller:
+
+  class ProductsController < ApplicationController
+    def index
+      @searcher = ProductSearcher.new params[:product]
+    end
+  end
+
+And use it in your view with form helper, just like model:
+
+  # app/views/products/index.html.slim
+  = form_for @searcher do |f|
+    = f.label :name
+    = f.text_field :name
+
+    = f.label :max_price
+    = f.number_field :max_price
+
+    = f.submit
+
+  h1 Search results
+  ul
+    = @searcher.results.each do |product|
+      li #{product.name} - #{product.price}
+
+
+## TODO
+
+* add tests
+* add support for ThinkingSphinx
