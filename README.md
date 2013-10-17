@@ -1,6 +1,7 @@
 # Seeker
 
-This Ruby on Rails gem provides an elegant way to separate search logic out of models.
+This Ruby on Rails gem provides an elegant way to separate search logic out of models
+and build search forms just like create/update ones.
 
 Right now it supports only [sunspot](https://github.com/sunspot/sunspot) and was tested on Rails 3.2.13.
 
