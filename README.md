@@ -6,7 +6,7 @@ Right now it supports only [sunspot](https://github.com/sunspot/sunspot).
 
 ## Installation
 
-  gem 'seeker'
+    gem 'seeker'
 
 ## Usage
 
