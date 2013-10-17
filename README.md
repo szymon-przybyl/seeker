@@ -62,4 +62,4 @@ And use it in your view with form helper, just like model:
 ## TODO
 
 * add tests
-* add support for ThinkingSphinx
+* add support for [ThinkingSphinx](https://github.com/pat/thinking-sphinx)
