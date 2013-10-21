@@ -14,6 +14,7 @@ Right now it supports only [sunspot](https://github.com/sunspot/sunspot) and was
 Given you have Product model:
 
     class Product < ActiveRecord::Base
+      mount_searcher ProductSearcher
     end
 
 Create corresponding searcher:
@@ -37,7 +38,7 @@ Use it in your controller:
 
     class ProductsController < ApplicationController
       def index
-        @searcher = ProductSearcher.new params[:product]
+        @searcher = Product.searcher params[:product]
       end
     end
 
