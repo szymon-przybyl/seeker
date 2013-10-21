@@ -1,4 +1,12 @@
 class Seeker::Base
+  class_attribute :model
+
+  def self.construct(model)
+    self.model = model
+    model.searchable &@_searchable if @_searchable
+    self
+  end
+
   def initialize(params={})
     params.each do |attr, value|
       self.public_send("#{attr}=", value)
@@ -8,18 +16,11 @@ class Seeker::Base
   end
 
   def self.model_name
-    @_model_name ||= begin
-      model = eval self.name.sub(/Searcher$/, '')
-      ActiveModel::Name.new(model)
-    end
-  end
-
-  def self.model
-    model_name.constantize
+    @_model_name ||= ActiveModel::Name.new model
   end
 
   def self.searchable(&block)
-    self.model.searchable &block
+    @_searchable = block
   end
 
   # Searcher needs to implement it
