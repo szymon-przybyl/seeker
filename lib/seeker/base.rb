@@ -3,7 +3,7 @@ class Seeker::Base
 
   def self.construct(model)
     self.model = model
-    model.searchable &@_searchable if @_searchable
+    model.searchable(@_searchable_options, &@_searchable) if @_searchable
     self
   end
 
@@ -19,7 +19,8 @@ class Seeker::Base
     @_model_name ||= ActiveModel::Name.new model
   end
 
-  def self.searchable(&block)
+  def self.searchable(searchable_options = {}, &block)
+    @_searchable_options = searchable_options
     @_searchable = block
   end
 
