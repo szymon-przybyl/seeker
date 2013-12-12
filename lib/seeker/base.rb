@@ -10,9 +10,7 @@ class Seeker::Base
   def initialize(params={})
     params.each do |attr, value|
       self.public_send("#{attr}=", value)
-    end if params
-
-    super()
+    end
   end
 
   def self.model_name
