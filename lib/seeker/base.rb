@@ -17,6 +17,8 @@ class Seeker::Base
     params.each do |attr, value|
       self.public_send("#{attr}=", value)
     end if params
+
+    self
   end
 
   def self.model_name
