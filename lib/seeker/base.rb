@@ -47,6 +47,11 @@ class Seeker::Base
     nil
   end
 
+  # force plural route in ActionDispatch::Routing::PolymorphicRoutes#polymorphic_url
+  def persisted?
+    false
+  end
+
   def searcher?
     true
   end

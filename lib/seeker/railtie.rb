@@ -1,5 +1,4 @@
 require 'seeker/form_helper'
-require 'seeker/route_helper'
 require 'seeker/searcher_mounter'
 
 module Seeker
