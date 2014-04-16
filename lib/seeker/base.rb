@@ -37,8 +37,12 @@ class Seeker::Base
     {}
   end
 
+  def seek
+    self.class.model.search(options, &method(:search))
+  end
+
   def results
-    self.class.model.search(options, &method(:search)).results
+    seek.results
   end
 
   def to_key
