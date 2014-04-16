@@ -43,12 +43,13 @@ class Seeker::Base
     seek.results
   end
 
-  def to_key
-    nil
-  end
-
   # force plural route in ActionDispatch::Routing::PolymorphicRoutes#polymorphic_url
   def persisted?
     false
+  end
+
+  # for ActionController::RecordIdentifier#record_key_for_dom_id
+  def to_key
+    nil
   end
 end
