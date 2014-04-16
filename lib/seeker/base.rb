@@ -9,15 +9,13 @@ class Seeker::Base
 
   def initialize(params={})
     assign params
-
-    super()
   end
 
   def assign(params)
     params.each do |attr, value|
       self.public_send("#{attr}=", value)
-    end if params
-
+    end
+    
     self
   end
 
