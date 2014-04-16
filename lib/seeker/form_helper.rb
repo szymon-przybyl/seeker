@@ -5,7 +5,7 @@ module Seeker::FormHelper
 
     as = options[:as]
     # added searcher
-    action, method = if object.respond_to?(:searcher?)
+    action, method = if object.class < Seeker::Base
                        [:search, :get]
                      else
                        object.respond_to?(:persisted?) && object.persisted? ? [:edit, :put] : [:new, :post]

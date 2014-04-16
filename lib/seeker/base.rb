@@ -51,8 +51,4 @@ class Seeker::Base
   def persisted?
     false
   end
-
-  def searcher?
-    true
-  end
 end
