@@ -1,22 +1,28 @@
 module Seeker::FormHelper
-  def apply_form_for_options!(object_or_array, options) #:nodoc:
-    object = object_or_array.is_a?(Array) ? object_or_array.last : object_or_array
-    object = convert_to_model(object)
+  def apply_form_for_options!(record, object, options) #:nodoc:
+    object = convert_to_model(object) unless object.class < Seeker::Base
 
     as = options[:as]
+    namespace = options[:namespace]
     # added searcher
     action, method = if object.class < Seeker::Base
                        [:search, :get]
                      else
-                       object.respond_to?(:persisted?) && object.persisted? ? [:edit, :put] : [:new, :post]
+                       object.respond_to?(:persisted?) && object.persisted? ? [:edit, :patch] : [:new, :post]
                      end
 
+    object = convert_to_model(object) if object.class < Seeker::Base
+
     options[:html].reverse_merge!(
-      :class  => as ? "#{action}_#{as}" : dom_class(object, action),
-      :id     => as ? "#{action}_#{as}" : [options[:namespace], dom_id(object, action)].compact.join("_").presence,
-      :method => method
+      class:  as ? "#{action}_#{as}" : dom_class(object, action),
+      id:     (as ? [namespace, action, as] : [namespace, dom_id(object, action)]).compact.join("_").presence,
+      method: method
     )
 
-    options[:url] ||= polymorphic_path(object_or_array, :format => options.delete(:format))
+    options[:url] ||= if options.key?(:format)
+                        polymorphic_path(record, format: options.delete(:format))
+                      else
+                        polymorphic_path(record, {})
+                      end
   end
 end

@@ -19,8 +19,16 @@ class Seeker::Base
     self
   end
 
+  def model_name
+    self.class.model_name
+  end
+
+  def to_model
+    model.new
+  end
+
   def self.model_name
-    @_model_name ||= ActiveModel::Name.new model
+    @_model_name ||= ActiveModel::Name.new self
   end
 
   def self.searchable(searchable_options = {}, &block)
